@@ -1,0 +1,9 @@
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\bin\Debug\Plugins\DotSpatial.Plugins.TableEditor\Readme.txt
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\bin\Debug\Plugins\DotSpatial.Plugins.TableEditor\DotSpatial.Plugins.TableEditor.dll
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\bin\Debug\Plugins\DotSpatial.Plugins.TableEditor\DotSpatial.Plugins.TableEditor.pdb
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.csprojAssemblyReference.cache
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.Properties.Resources.resources
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.csproj.GenerateResource.cache
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.csproj.CoreCompileInputs.cache
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.dll
+C:\Users\Moumed\Downloads\Compressed\DotSpatial\sourceCode\dotspatial\Trunk\DotSpatial.Plugins.TableEditor\obj\Debug\DotSpatial.Plugins.TableEditor.pdb
