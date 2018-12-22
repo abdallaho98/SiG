@@ -35,14 +35,22 @@ namespace SiG
             this.spatialDockManager1 = new DotSpatial.Controls.SpatialDockManager();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.spatialStatusStrip1 = new DotSpatial.Controls.SpatialStatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.legend1 = new DotSpatial.Controls.Legend();
             this.map1 = new DotSpatial.Controls.Map();
+            this.spatialHeaderControl1 = new DotSpatial.Controls.SpatialHeaderControl();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit = new System.Windows.Forms.ToolStripDropDownButton();
             this.openRasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openShapeFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.pointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,13 +58,19 @@ namespace SiG
             this.polyGoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.openShapeFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.xPos = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.yPos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
             this.spatialDockManager1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.spatialStatusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spatialHeaderControl1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,10 +78,10 @@ namespace SiG
             // 
             this.appManager1.Directories = ((System.Collections.Generic.List<string>)(resources.GetObject("appManager1.Directories")));
             this.appManager1.DockManager = this.spatialDockManager1;
-            this.appManager1.HeaderControl = null;
+            this.appManager1.HeaderControl = this.spatialHeaderControl1;
             this.appManager1.Legend = this.legend1;
             this.appManager1.Map = this.map1;
-            this.appManager1.ProgressHandler = null;
+            this.appManager1.ProgressHandler = this.spatialStatusStrip1;
             this.appManager1.ShowExtensionsDialogMode = DotSpatial.Controls.ShowExtensionsDialogMode.Default;
             // 
             // spatialDockManager1
@@ -101,6 +115,7 @@ namespace SiG
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.spatialStatusStrip1);
             this.tabPage1.Controls.Add(this.legend1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
@@ -109,6 +124,31 @@ namespace SiG
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Legend";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // spatialStatusStrip1
+            // 
+            this.spatialStatusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.spatialStatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
+            this.spatialStatusStrip1.Location = new System.Drawing.Point(3, 556);
+            this.spatialStatusStrip1.Name = "spatialStatusStrip1";
+            this.spatialStatusStrip1.ProgressBar = this.toolStripProgressBar1;
+            this.spatialStatusStrip1.ProgressLabel = this.toolStripStatusLabel1;
+            this.spatialStatusStrip1.Size = new System.Drawing.Size(369, 25);
+            this.spatialStatusStrip1.TabIndex = 1;
+            this.spatialStatusStrip1.Text = "spatialStatusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(50, 20);
+            this.toolStripStatusLabel1.Text = "Ready";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 19);
             // 
             // legend1
             // 
@@ -145,7 +185,7 @@ namespace SiG
             this.map1.Legend = this.legend1;
             this.map1.Location = new System.Drawing.Point(0, 0);
             this.map1.Name = "map1";
-            this.map1.ProgressHandler = null;
+            this.map1.ProgressHandler = this.spatialStatusStrip1;
             this.map1.ProjectionModeDefine = DotSpatial.Controls.ActionMode.Prompt;
             this.map1.ProjectionModeReproject = DotSpatial.Controls.ActionMode.Prompt;
             this.map1.RedrawLayersWhileResizing = false;
@@ -153,6 +193,37 @@ namespace SiG
             this.map1.Size = new System.Drawing.Size(765, 613);
             this.map1.TabIndex = 0;
             this.map1.ZoomOutFartherThanMaxExtent = false;
+            // 
+            // spatialHeaderControl1
+            // 
+            this.spatialHeaderControl1.ApplicationManager = this.appManager1;
+            this.spatialHeaderControl1.MenuStrip = this.menuStrip1;
+            this.spatialHeaderControl1.ToolbarsContainer = null;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.openToolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1152, 28);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Visible = false;
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem1
+            // 
+            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(57, 24);
+            this.openToolStripMenuItem1.Text = "Open";
             // 
             // toolStripSplitButton1
             // 
@@ -199,9 +270,16 @@ namespace SiG
             // openRasterToolStripMenuItem
             // 
             this.openRasterToolStripMenuItem.Name = "openRasterToolStripMenuItem";
-            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.openRasterToolStripMenuItem.Text = "Open Raster";
             this.openRasterToolStripMenuItem.Click += new System.EventHandler(this.openRasterToolStripMenuItem_Click);
+            // 
+            // openShapeFileToolStripMenuItem
+            // 
+            this.openShapeFileToolStripMenuItem.Name = "openShapeFileToolStripMenuItem";
+            this.openShapeFileToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.openShapeFileToolStripMenuItem.Text = "Open ShapeFile";
+            this.openShapeFileToolStripMenuItem.Click += new System.EventHandler(this.openShapeFileToolStripMenuItem_Click_1);
             // 
             // toolStrip1
             // 
@@ -268,20 +346,55 @@ namespace SiG
             this.tabPage2.Size = new System.Drawing.Size(200, 100);
             this.tabPage2.TabIndex = 0;
             // 
-            // openShapeFileToolStripMenuItem
+            // label1
             // 
-            this.openShapeFileToolStripMenuItem.Name = "openShapeFileToolStripMenuItem";
-            this.openShapeFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.openShapeFileToolStripMenuItem.Text = "Open ShapeFile";
-            this.openShapeFileToolStripMenuItem.Click += new System.EventHandler(this.openShapeFileToolStripMenuItem_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(680, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 17);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "X :";
+            // 
+            // xPos
+            // 
+            this.xPos.AutoSize = true;
+            this.xPos.Location = new System.Drawing.Point(726, 9);
+            this.xPos.Name = "xPos";
+            this.xPos.Size = new System.Drawing.Size(60, 17);
+            this.xPos.TabIndex = 7;
+            this.xPos.Text = "0.00000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(829, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(25, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Y :";
+            // 
+            // yPos
+            // 
+            this.yPos.AutoSize = true;
+            this.yPos.Location = new System.Drawing.Point(877, 9);
+            this.yPos.Name = "yPos";
+            this.yPos.Size = new System.Drawing.Size(60, 17);
+            this.yPos.TabIndex = 9;
+            this.yPos.Text = "0.00000";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 640);
+            this.Controls.Add(this.yPos);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.xPos);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.spatialDockManager1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.spatialDockManager1.Panel1.ResumeLayout(false);
@@ -290,6 +403,12 @@ namespace SiG
             this.spatialDockManager1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.spatialStatusStrip1.ResumeLayout(false);
+            this.spatialStatusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spatialHeaderControl1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -323,6 +442,17 @@ namespace SiG
         private System.Windows.Forms.ToolStripMenuItem polyGoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
         private System.Windows.Forms.ToolStripMenuItem openShapeFileToolStripMenuItem;
+        private DotSpatial.Controls.SpatialStatusStrip spatialStatusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private DotSpatial.Controls.SpatialHeaderControl spatialHeaderControl1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label xPos;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label yPos;
     }
 }
 

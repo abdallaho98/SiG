@@ -20,27 +20,50 @@ namespace SiG
     public partial class Form1 : Form
     {
         private bool point = false, polyline = false, polygone = false;
-        private FeatureSet _markers,_gones,_lines;
+        private FeatureSet _markers, _gones, _lines;
         private DataTable dataTable;
         private LineString lineString;
         private MapPointLayer _markerLayer;
         private LinearRing linearRing;
         private MapPolygonLayer _goneLayer;
         private MapLineLayer _lineLayer;
+        private Timer timer;
         private List<Coordinate> Corr;
         private int ID;
-        private DotSpatial.Topology.Polygon mPolygone; 
+        private DotSpatial.Topology.Polygon mPolygone;
 
         public Form1()
         {
+
             InitializeComponent();
-            appManager1.LoadExtensions();
+            timer = new Timer();
+            timer.Tick += new EventHandler(GETXY);
+            timer.Interval = 500;
+
+        }
+
+        private void mousePos(object sender, EventArgs e)
+        {
+            timer.Start();
+        }
+
+        private void mouseExit(object sender, EventArgs e)
+        {
+            timer.Stop();
+        }
+        private void GETXY(object o, EventArgs e)
+        {
+            Coordinate c = map1.PixelToProj(new System.Drawing.Point(MousePosition.X, MousePosition.Y));
+            xPos.Text = c.X.ToString();
+            yPos.Text = c.Y.ToString();
         }
 
         private void openRasterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             map1.AddImageLayer();
             map1.FunctionMode = DotSpatial.Controls.FunctionMode.Pan;
+            map1.MouseEnter += mousePos;
+            map1.MouseLeave += mouseExit;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -66,7 +89,7 @@ namespace SiG
                 ID++;
                 _lines.InitializeVertices();
                 map1.Refresh();
-            }
+             }
 
             // Intercept only the right click for adding markers
             if (((MouseEventArgs)e).Button != MouseButtons.Left) return;
@@ -127,10 +150,12 @@ namespace SiG
            
         }
 
-        private void openShapeFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openShapeFileToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             map1.AddLayer();
             map1.FunctionMode = FunctionMode.Pan;
+            map1.MouseEnter += mousePos;
+            map1.MouseLeave += mouseExit;
         }
 
         private void pointToolStripMenuItem_Click(object sender, EventArgs e)
