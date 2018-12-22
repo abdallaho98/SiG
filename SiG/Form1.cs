@@ -49,7 +49,13 @@ namespace SiG
 
         private void map1_Load(object sender, MouseEventArgs e)
         {
-           
+
+            if (((MouseEventArgs)e).Button == MouseButtons.Right && polygone) {
+                MessageBox.Show("new age");
+                Corr = new List<Coordinate>();
+                ID++;
+            }
+
             // Intercept only the right click for adding markers
             if (((MouseEventArgs)e).Button != MouseButtons.Left) return;
             if (point)
@@ -69,7 +75,7 @@ namespace SiG
             } else {
                 // Get the geographic location that was clicked
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
-                
+
 
                 if (Corr.Count == 0)
                 {
@@ -79,13 +85,14 @@ namespace SiG
                 }
                 else {
                     linearRing.Coordinates.Add(c);
-                    _gones.AddFeature(mPolygone as IGeometry);
+                    _gones.RemoveShapeAt(ID);
+                    _gones.AddFeature(mPolygone as IGeometry).DataRow["ID"] = ID.ToString();
                     // Drawing will take place from a bitmap buffer, so if data is updated,
                     // we need to tell the map to refresh the buffer 
-                    map1.MapFrame.Invalidate();
                 }
-              
-               
+                _gones.InitializeVertices();
+                map1.ResetBuffer();
+
             }
            
         }
@@ -145,8 +152,9 @@ namespace SiG
 
             // The MapPolygone controls the drawing of the marker features
             _goneLayer = new MapPolygonLayer(_gones);
-
+            ID = 0;
             Corr = new List<Coordinate>();
+            _gones.DataTable.Columns.Add("ID", typeof(string));
 
             // The Symbolizer controls what the points look like
             _goneLayer.Symbolizer = new PolygonSymbolizer(Color.Blue);
