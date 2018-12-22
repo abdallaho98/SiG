@@ -21,10 +21,12 @@ namespace SiG
     {
         private bool point = false, polyline = false, polygone = false;
         private FeatureSet _markers,_gones;
+        private DataTable dataTable;
         private MapPointLayer _markerLayer;
         private LinearRing linearRing;
         private MapPolygonLayer _goneLayer;
         private List<Coordinate> Corr;
+        private int ID;
         private DotSpatial.Topology.Polygon mPolygone; 
 
         public Form1()
@@ -56,8 +58,9 @@ namespace SiG
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
                 
                 // Add the new coordinate as a "point" to the point featureset
-                _markers.AddFeature(new DotSpatial.Topology.Point(c));
-
+                _markers.AddFeature(new DotSpatial.Topology.Point(c)).DataRow["ID"] = ID;
+                ID++;
+                _markers.InitializeVertices();
                 // Drawing will take place from a bitmap buffer, so if data is updated,
                 // we need to tell the map to refresh the buffer 
                 map1.MapFrame.Invalidate();
@@ -87,6 +90,12 @@ namespace SiG
            
         }
 
+        private void openShapeFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            map1.AddLayer();
+            map1.FunctionMode = FunctionMode.Pan;
+        }
+
         private void pointToolStripMenuItem_Click(object sender, EventArgs e)
         {
             point = true;
@@ -100,10 +109,11 @@ namespace SiG
 
             // The FeatureSet starts with no data; be sure to set it to the point featuretype
             _markers = new FeatureSet(FeatureType.Point);
-
+            dataTable = _markers.DataTable;
+            ID = 0;
+            dataTable.Columns.Add("ID");
             // The MapPointLayer controls the drawing of the marker features
             _markerLayer = new MapPointLayer(_markers);
-
             // The Symbolizer controls what the points look like
             _markerLayer.Symbolizer = new PointSymbolizer(Color.Black, DotSpatial.Symbology.PointShape.Ellipse, 10);
 

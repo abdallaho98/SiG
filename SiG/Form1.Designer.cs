@@ -50,6 +50,7 @@ namespace SiG
             this.polyGoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.openShapeFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
@@ -187,7 +188,8 @@ namespace SiG
             // 
             this.Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.Edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openRasterToolStripMenuItem});
+            this.openRasterToolStripMenuItem,
+            this.openShapeFileToolStripMenuItem});
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Edit.Name = "Edit";
@@ -197,7 +199,7 @@ namespace SiG
             // openRasterToolStripMenuItem
             // 
             this.openRasterToolStripMenuItem.Name = "openRasterToolStripMenuItem";
-            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.openRasterToolStripMenuItem.Text = "Open Raster";
             this.openRasterToolStripMenuItem.Click += new System.EventHandler(this.openRasterToolStripMenuItem_Click);
             // 
@@ -232,21 +234,21 @@ namespace SiG
             // pointToolStripMenuItem
             // 
             this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.pointToolStripMenuItem.Text = "Point";
             this.pointToolStripMenuItem.Click += new System.EventHandler(this.pointToolStripMenuItem_Click);
             // 
             // polyLineToolStripMenuItem
             // 
             this.polyLineToolStripMenuItem.Name = "polyLineToolStripMenuItem";
-            this.polyLineToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.polyLineToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.polyLineToolStripMenuItem.Text = "PolyLine";
             this.polyLineToolStripMenuItem.Click += new System.EventHandler(this.polyLineToolStripMenuItem_Click);
             // 
             // polyGoneToolStripMenuItem
             // 
             this.polyGoneToolStripMenuItem.Name = "polyGoneToolStripMenuItem";
-            this.polyGoneToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.polyGoneToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.polyGoneToolStripMenuItem.Text = "PolyGone";
             this.polyGoneToolStripMenuItem.Click += new System.EventHandler(this.polyGoneToolStripMenuItem_Click);
             // 
@@ -265,6 +267,13 @@ namespace SiG
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(200, 100);
             this.tabPage2.TabIndex = 0;
+            // 
+            // openShapeFileToolStripMenuItem
+            // 
+            this.openShapeFileToolStripMenuItem.Name = "openShapeFileToolStripMenuItem";
+            this.openShapeFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.openShapeFileToolStripMenuItem.Text = "Open ShapeFile";
+            this.openShapeFileToolStripMenuItem.Click += new System.EventHandler(this.openShapeFileToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -313,6 +322,7 @@ namespace SiG
         private System.Windows.Forms.ToolStripMenuItem polyLineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem polyGoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
+        private System.Windows.Forms.ToolStripMenuItem openShapeFileToolStripMenuItem;
     }
 }
 
