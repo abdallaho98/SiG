@@ -20,11 +20,13 @@ namespace SiG
     public partial class Form1 : Form
     {
         private bool point = false, polyline = false, polygone = false;
-        private FeatureSet _markers,_gones;
+        private FeatureSet _markers,_gones,_lines;
         private DataTable dataTable;
+        private LineString lineString;
         private MapPointLayer _markerLayer;
         private LinearRing linearRing;
         private MapPolygonLayer _goneLayer;
+        private MapLineLayer _lineLayer;
         private List<Coordinate> Corr;
         private int ID;
         private DotSpatial.Topology.Polygon mPolygone; 
@@ -54,6 +56,16 @@ namespace SiG
                 MessageBox.Show("new age");
                 Corr = new List<Coordinate>();
                 ID++;
+                _gones.InitializeVertices();
+                map1.Refresh();
+            }
+            if (((MouseEventArgs)e).Button == MouseButtons.Right && polyline)
+            {
+                MessageBox.Show("new age");
+                Corr = new List<Coordinate>();
+                ID++;
+                _lines.InitializeVertices();
+                map1.Refresh();
             }
 
             // Intercept only the right click for adding markers
@@ -72,6 +84,23 @@ namespace SiG
                 map1.MapFrame.Invalidate();
             }
             else if (polyline) {
+                Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
+                if (Corr.Count == 0)
+                {
+                    lineString = new LineString(Corr);
+                    lineString.Coordinates.Add(c);
+                }
+                else
+                {
+                    lineString.Coordinates.Add(c);
+                    _lines.RemoveShapeAt(ID);
+                    _lines.AddFeature(lineString as IGeometry).DataRow["ID"] = ID.ToString();
+                    // Drawing will take place from a bitmap buffer, so if data is updated,
+                    // we need to tell the map to refresh the buffer 
+                }
+                _lines.InitializeVertices();
+                map1.ResetBuffer();
+                map1.Refresh();
             } else {
                 // Get the geographic location that was clicked
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
@@ -92,6 +121,7 @@ namespace SiG
                 }
                 _gones.InitializeVertices();
                 map1.ResetBuffer();
+                map1.Refresh();
 
             }
            
@@ -134,6 +164,24 @@ namespace SiG
             point = false;
             polygone = false;
             polyline = true;
+            // Enable left click panning and mouse wheel zooming
+            map1.FunctionMode = FunctionMode.Pan;
+
+            // Handle mouse up event on the map
+            map1.MouseDoubleClick += map1_Load;
+
+            // The FeatureSet starts with no data; be sure to set it to the polygone featuretype
+            _lines = new FeatureSet(FeatureType.Line);
+
+            // The MapPolygone controls the drawing of the marker features
+            _lineLayer = new MapLineLayer(_lines);
+            ID = 0;
+            Corr = new List<Coordinate>();
+            _lines.DataTable.Columns.Add("ID", typeof(string));
+
+            _lineLayer.LegendText = "Line";
+            // A drawing layer draws on top of data layers, but is still georeferenced.
+            map1.Layers.Add(_lineLayer);
         }
 
         private void polyGoneToolStripMenuItem_Click(object sender, EventArgs e)
