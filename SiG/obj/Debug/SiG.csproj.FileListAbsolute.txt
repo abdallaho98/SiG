@@ -68,3 +68,4 @@ C:\Users\Dell\source\repos\SiG\SiG\bin\Debug\it-IT\DotSpatial.Symbology.Forms.re
 C:\Users\Dell\source\repos\SiG\SiG\bin\Debug\pt-BR\DotSpatial.Symbology.Forms.resources.dll
 C:\Users\Dell\source\repos\SiG\SiG\bin\Debug\zh-CN\DotSpatial.Symbology.Forms.resources.dll
 C:\Users\Dell\source\repos\SiG\SiG\obj\Debug\SiG.Form2.resources
+C:\Users\Dell\source\repos\SiG\SiG\obj\Debug\SiG.Form3.resources

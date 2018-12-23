@@ -65,6 +65,7 @@ namespace SiG
             this.yPos = new System.Windows.Forms.Label();
             this.attributeTable = new System.Windows.Forms.DataGridView();
             this.AddComlumn = new System.Windows.Forms.Button();
+            this.topologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
@@ -340,7 +341,8 @@ namespace SiG
             // 
             this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showAttributeTableToolStripMenuItem});
+            this.showAttributeTableToolStripMenuItem,
+            this.topologyToolStripMenuItem});
             this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton2.Name = "toolStripSplitButton2";
@@ -416,6 +418,13 @@ namespace SiG
             this.AddComlumn.UseVisualStyleBackColor = true;
             this.AddComlumn.Visible = false;
             this.AddComlumn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // topologyToolStripMenuItem
+            // 
+            this.topologyToolStripMenuItem.Name = "topologyToolStripMenuItem";
+            this.topologyToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.topologyToolStripMenuItem.Text = "Topology";
+            this.topologyToolStripMenuItem.Click += new System.EventHandler(this.topologyToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -494,6 +503,7 @@ namespace SiG
         private System.Windows.Forms.DataGridView attributeTable;
         private System.Windows.Forms.ToolStripMenuItem showAttributeTableToolStripMenuItem;
         private System.Windows.Forms.Button AddComlumn;
+        private System.Windows.Forms.ToolStripMenuItem topologyToolStripMenuItem;
     }
 }
 

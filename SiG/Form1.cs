@@ -30,6 +30,7 @@ namespace SiG
         private MapLineLayer _lineLayer;
         private Timer timer;
         private Form2 entreType;
+        private Form3 topology;
         private List<Coordinate> Corr;
         private int ID;
         private IFeature mapPolyGonelayer,mapPolylinelayer;
@@ -82,6 +83,7 @@ namespace SiG
 
             if (((MouseEventArgs)e).Button == MouseButtons.Right && polygone) {
                 MessageBox.Show("New Polygone");
+                linearRing.Coordinates.Add(linearRing.Coordinates[0]);
                 Corr = new List<Coordinate>();
                 ID = _goneLayer.DataSet.Features.Count;
                 mapPolyGonelayer = null;
@@ -123,7 +125,7 @@ namespace SiG
                     lineString.Coordinates.Add(c);
                     if (mapPolylinelayer == null) {
                         mapPolylinelayer = _lineLayer.DataSet.AddFeature(lineString as IGeometry);
-                        mapPolylinelayer.DataRow["ID"] = ID.ToString();
+                        mapPolylinelayer.DataRow["ID"] = ID;
                     }
                     
                 }
@@ -144,7 +146,7 @@ namespace SiG
                     linearRing.Coordinates.Add(c);
                     if (mapPolyGonelayer == null) {
                         mapPolyGonelayer = _goneLayer.DataSet.AddFeature(mPolygone as IGeometry);
-                        mapPolyGonelayer.DataRow["ID"] = ID.ToString();
+                        mapPolyGonelayer.DataRow["ID"] = ID;
                     } 
                 }
                 _gones.InitializeVertices();
@@ -198,6 +200,13 @@ namespace SiG
             }
         }
 
+        private void topologyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(  map1.Layers[1].LegendText.ToString()+" "+((MapPolygonLayer)map1.Layers[1]).FeatureSet.Features[0].Area().ToString());
+            topology = new Form3(map1.Layers);
+            topology.ShowDialog();
+        }
+
         private void openShapeFileToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             map1.AddLayer();
@@ -247,7 +256,7 @@ namespace SiG
             _lineLayer = new MapLineLayer(_lines);
             ID = 0;
             Corr = new List<Coordinate>();
-            _lines.DataTable.Columns.Add("ID", typeof(string));
+            _lines.DataTable.Columns.Add("ID");
 
             _lineLayer.LegendText = "Line" + _lineLayer.GetHashCode();
             // A drawing layer draws on top of data layers, but is still georeferenced.
