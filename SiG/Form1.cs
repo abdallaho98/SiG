@@ -17,7 +17,7 @@ using DotSpatial.Topology;
 
 namespace SiG
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form , Interface1 
     {
         private bool point = false, polyline = false, polygone = false;
         private FeatureSet _markers, _gones, _lines;
@@ -25,9 +25,11 @@ namespace SiG
         private LineString lineString;
         private MapPointLayer _markerLayer;
         private LinearRing linearRing;
+        private DataTable dataTableWorking;
         private MapPolygonLayer _goneLayer;
         private MapLineLayer _lineLayer;
         private Timer timer;
+        private Form2 entreType;
         private List<Coordinate> Corr;
         private int ID;
         private IFeature mapPolyGonelayer,mapPolylinelayer;
@@ -35,11 +37,13 @@ namespace SiG
 
         public Form1()
         {
+            entreType = new Form2(this);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
             timer = new Timer();
             timer.Tick += new EventHandler(GETXY);
             timer.Interval = 500;
+            attributeTable.AllowUserToAddRows = false;
 
         }
 
@@ -165,18 +169,27 @@ namespace SiG
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            entreType.ShowDialog();
+        }
+
         private void ShowTable(object sender, EventArgs e)
         {
+            AddComlumn.Visible = true;
             for (int i = 0; i < map1.Layers.Count; i++) {
                 if (map1.Layers[i].LegendText.Trim().Equals(((ToolStripMenuItem)sender).Text.Trim())) {
                     switch (map1.Layers[i].GetType().ToString().Trim()) {
                         case "DotSpatial.Controls.MapPointLayer":
+                            dataTableWorking = ((MapPointLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
                             attributeTable.DataSource = ((MapPointLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
                             break;
                         case "DotSpatial.Controls.MapLineLayer":
+                            dataTableWorking = ((MapLineLayer)map1.GetLayers()[i]).FeatureSet.DataTable; ;
                             attributeTable.DataSource = ((MapLineLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
                             break;
                         case "DotSpatial.Controls.MapPolygonLayer":
+                            dataTableWorking = ((MapPolygonLayer)map1.GetLayers()[i]).FeatureSet.DataTable; ;
                             attributeTable.DataSource = ((MapPolygonLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
                             break;
                     }
@@ -265,6 +278,24 @@ namespace SiG
             _goneLayer.LegendText = "Surface" + _goneLayer.GetHashCode();
             // A drawing layer draws on top of data layers, but is still georeferenced.
             map1.Layers.Add(_goneLayer);
+        }
+
+        public void SendData(string name, string type)
+        {
+            entreType.Close();
+            switch (type) {
+                case "String":
+                    dataTableWorking.Columns.Add(name, typeof(string));
+                    break;
+                case "Int":
+                    dataTableWorking.Columns.Add(name, typeof(int));
+                    break;
+                case "Double":
+                    dataTableWorking.Columns.Add(name, typeof(double));
+                    break;
+            } 
+            map1.Refresh();
+            legend1.Refresh();
         }
     }
 

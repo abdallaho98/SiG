@@ -64,6 +64,7 @@ namespace SiG
             this.label3 = new System.Windows.Forms.Label();
             this.yPos = new System.Windows.Forms.Label();
             this.attributeTable = new System.Windows.Forms.DataGridView();
+            this.AddComlumn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
@@ -347,7 +348,7 @@ namespace SiG
             this.toolStripSplitButton2.Text = "Data";
             // 
             // showAttributeTableToolStripMenuItem
-            //
+            // 
             this.showAttributeTableToolStripMenuItem.Name = "showAttributeTableToolStripMenuItem";
             this.showAttributeTableToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.showAttributeTableToolStripMenuItem.Text = "Show Attribute Table";
@@ -405,11 +406,23 @@ namespace SiG
             this.attributeTable.Size = new System.Drawing.Size(1149, 149);
             this.attributeTable.TabIndex = 11;
             // 
+            // AddComlumn
+            // 
+            this.AddComlumn.Location = new System.Drawing.Point(1031, 499);
+            this.AddComlumn.Name = "AddComlumn";
+            this.AddComlumn.Size = new System.Drawing.Size(109, 34);
+            this.AddComlumn.TabIndex = 12;
+            this.AddComlumn.Text = "Add column";
+            this.AddComlumn.UseVisualStyleBackColor = true;
+            this.AddComlumn.Visible = false;
+            this.AddComlumn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 643);
+            this.Controls.Add(this.AddComlumn);
             this.Controls.Add(this.attributeTable);
             this.Controls.Add(this.yPos);
             this.Controls.Add(this.label3);
@@ -480,6 +493,7 @@ namespace SiG
         private System.Windows.Forms.Label yPos;
         private System.Windows.Forms.DataGridView attributeTable;
         private System.Windows.Forms.ToolStripMenuItem showAttributeTableToolStripMenuItem;
+        private System.Windows.Forms.Button AddComlumn;
     }
 }
 
