@@ -241,6 +241,9 @@ namespace SiG
 
         private void polyLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
+            MessageBox.Show("Double Right Click to Finnish this line and create another Line");
             point = false;
             polygone = false;
             polyline = true;
@@ -265,6 +268,7 @@ namespace SiG
 
         private void polyGoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Double Right Click to Finnish this polygones and create another Polygone");
             point = false;
             polygone = true;
             polyline = false;
