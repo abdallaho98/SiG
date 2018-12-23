@@ -30,6 +30,7 @@ namespace SiG
         private Timer timer;
         private List<Coordinate> Corr;
         private int ID;
+        private IFeature mapPolyGonelayer,mapPolylinelayer;
         private DotSpatial.Topology.Polygon mPolygone;
 
         public Form1()
@@ -76,19 +77,19 @@ namespace SiG
         {
 
             if (((MouseEventArgs)e).Button == MouseButtons.Right && polygone) {
-                MessageBox.Show("new age");
+                MessageBox.Show("New Polygone");
                 Corr = new List<Coordinate>();
-                ID++;
+                ID = _goneLayer.DataSet.Features.Count;
+                mapPolyGonelayer = null;
                 _gones.InitializeVertices();
-                map1.Refresh();
             }
             if (((MouseEventArgs)e).Button == MouseButtons.Right && polyline)
             {
-                MessageBox.Show("new age");
+                MessageBox.Show("New PolyLine");
                 Corr = new List<Coordinate>();
-                ID++;
+                ID = _lineLayer.DataSet.Features.Count;
+                mapPolylinelayer = null;
                 _lines.InitializeVertices();
-                map1.Refresh();
              }
 
             // Intercept only the right click for adding markers
@@ -99,8 +100,8 @@ namespace SiG
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
                 
                 // Add the new coordinate as a "point" to the point featureset
-                _markers.AddFeature(new DotSpatial.Topology.Point(c)).DataRow["ID"] = ID;
-                ID++;
+                _markerLayer.DataSet.AddFeature(new DotSpatial.Topology.Point(c)).DataRow["ID"] = ID;
+                ID = _markerLayer.DataSet.Features.Count;
                 _markers.InitializeVertices();
                 // Drawing will take place from a bitmap buffer, so if data is updated,
                 // we need to tell the map to refresh the buffer 
@@ -116,14 +117,14 @@ namespace SiG
                 else
                 {
                     lineString.Coordinates.Add(c);
-                    _lines.RemoveShapeAt(ID);
-                    _lines.AddFeature(lineString as IGeometry).DataRow["ID"] = ID.ToString();
-                    // Drawing will take place from a bitmap buffer, so if data is updated,
-                    // we need to tell the map to refresh the buffer 
+                    if (mapPolylinelayer == null) {
+                        mapPolylinelayer = _lineLayer.DataSet.AddFeature(lineString as IGeometry);
+                        mapPolylinelayer.DataRow["ID"] = ID.ToString();
+                    }
+                    
                 }
                 _lines.InitializeVertices();
                 map1.ResetBuffer();
-                map1.Refresh();
             } else {
                 // Get the geographic location that was clicked
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
@@ -137,15 +138,13 @@ namespace SiG
                 }
                 else {
                     linearRing.Coordinates.Add(c);
-                    _gones.RemoveShapeAt(ID);
-                    _gones.AddFeature(mPolygone as IGeometry).DataRow["ID"] = ID.ToString();
-                    // Drawing will take place from a bitmap buffer, so if data is updated,
-                    // we need to tell the map to refresh the buffer 
+                    if (mapPolyGonelayer == null) {
+                        mapPolyGonelayer = _goneLayer.DataSet.AddFeature(mPolygone as IGeometry);
+                        mapPolyGonelayer.DataRow["ID"] = ID.ToString();
+                    } 
                 }
                 _gones.InitializeVertices();
                 map1.ResetBuffer();
-                map1.Refresh();
-
             }
            
         }
@@ -170,7 +169,6 @@ namespace SiG
         {
             for (int i = 0; i < map1.Layers.Count; i++) {
                 if (map1.Layers[i].LegendText.Trim().Equals(((ToolStripMenuItem)sender).Text.Trim())) {
-                    MessageBox.Show(map1.Layers[i].GetType().ToString());
                     switch (map1.Layers[i].GetType().ToString().Trim()) {
                         case "DotSpatial.Controls.MapPointLayer":
                             attributeTable.DataSource = ((MapPointLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
@@ -203,8 +201,6 @@ namespace SiG
             // Enable left click panning and mouse wheel zooming
             map1.FunctionMode = FunctionMode.Pan;
 
-            // Handle mouse up event on the map
-            map1.MouseDoubleClick += map1_Load;
 
             // The FeatureSet starts with no data; be sure to set it to the point featuretype
             _markers = new FeatureSet(FeatureType.Point);
@@ -229,8 +225,7 @@ namespace SiG
             // Enable left click panning and mouse wheel zooming
             map1.FunctionMode = FunctionMode.Pan;
 
-            // Handle mouse up event on the map
-            map1.MouseDoubleClick += map1_Load;
+            mapPolylinelayer = null;
 
             // The FeatureSet starts with no data; be sure to set it to the polygone featuretype
             _lines = new FeatureSet(FeatureType.Line);
@@ -253,9 +248,8 @@ namespace SiG
             polyline = false;
             // Enable left click panning and mouse wheel zooming
             map1.FunctionMode = FunctionMode.Pan;
-
-            // Handle mouse up event on the map
-            map1.MouseDoubleClick += map1_Load;
+            mapPolyGonelayer = null;
+     
 
             // The FeatureSet starts with no data; be sure to set it to the polygone featuretype
             _gones = new FeatureSet(FeatureType.Polygon);
@@ -264,8 +258,7 @@ namespace SiG
             _goneLayer = new MapPolygonLayer(_gones);
             ID = 0;
             Corr = new List<Coordinate>();
-            _gones.DataTable.Columns.Add("ID", typeof(string));
-
+            _goneLayer.DataSet.DataTable.Columns.Add("ID", typeof(string));
             // The Symbolizer controls what the points look like
             _goneLayer.Symbolizer = new PolygonSymbolizer(Color.Blue);
 

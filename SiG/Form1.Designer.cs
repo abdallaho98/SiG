@@ -197,6 +197,7 @@ namespace SiG
             this.map1.Size = new System.Drawing.Size(765, 464);
             this.map1.TabIndex = 0;
             this.map1.ZoomOutFartherThanMaxExtent = false;
+            this.map1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.map1_Load);
             // 
             // spatialHeaderControl1
             // 
