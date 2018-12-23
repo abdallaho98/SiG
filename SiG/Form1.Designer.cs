@@ -57,11 +57,13 @@ namespace SiG
             this.polyLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polyGoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.showAttributeTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.xPos = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.yPos = new System.Windows.Forms.Label();
+            this.attributeTable = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
@@ -72,6 +74,7 @@ namespace SiG
             ((System.ComponentModel.ISupportInitialize)(this.spatialHeaderControl1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.attributeTable)).BeginInit();
             this.SuspendLayout();
             // 
             // appManager1
@@ -86,8 +89,9 @@ namespace SiG
             // 
             // spatialDockManager1
             // 
-            this.spatialDockManager1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spatialDockManager1.Location = new System.Drawing.Point(0, 27);
+            this.spatialDockManager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.spatialDockManager1.Location = new System.Drawing.Point(0, 29);
             this.spatialDockManager1.Name = "spatialDockManager1";
             // 
             // spatialDockManager1.Panel1
@@ -97,7 +101,7 @@ namespace SiG
             // spatialDockManager1.Panel2
             // 
             this.spatialDockManager1.Panel2.Controls.Add(this.map1);
-            this.spatialDockManager1.Size = new System.Drawing.Size(1152, 613);
+            this.spatialDockManager1.Size = new System.Drawing.Size(1152, 464);
             this.spatialDockManager1.SplitterDistance = 383;
             this.spatialDockManager1.TabControl1 = this.tabControl1;
             this.spatialDockManager1.TabControl2 = null;
@@ -110,7 +114,7 @@ namespace SiG
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(383, 613);
+            this.tabControl1.Size = new System.Drawing.Size(383, 464);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -120,7 +124,7 @@ namespace SiG
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(375, 584);
+            this.tabPage1.Size = new System.Drawing.Size(375, 435);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Legend";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -131,7 +135,7 @@ namespace SiG
             this.spatialStatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.spatialStatusStrip1.Location = new System.Drawing.Point(3, 556);
+            this.spatialStatusStrip1.Location = new System.Drawing.Point(3, 407);
             this.spatialStatusStrip1.Name = "spatialStatusStrip1";
             this.spatialStatusStrip1.ProgressBar = this.toolStripProgressBar1;
             this.spatialStatusStrip1.ProgressLabel = this.toolStripStatusLabel1;
@@ -153,7 +157,7 @@ namespace SiG
             // legend1
             // 
             this.legend1.BackColor = System.Drawing.Color.White;
-            this.legend1.ControlRectangle = new System.Drawing.Rectangle(0, 0, 369, 578);
+            this.legend1.ControlRectangle = new System.Drawing.Rectangle(0, 0, 369, 429);
             this.legend1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.legend1.DocumentRectangle = new System.Drawing.Rectangle(0, 0, 187, 428);
             this.legend1.HorizontalScrollEnabled = true;
@@ -166,7 +170,7 @@ namespace SiG
             this.legend1.ResetOnResize = false;
             this.legend1.SelectionFontColor = System.Drawing.Color.Black;
             this.legend1.SelectionHighlight = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(238)))), ((int)(((byte)(252)))));
-            this.legend1.Size = new System.Drawing.Size(369, 578);
+            this.legend1.Size = new System.Drawing.Size(369, 429);
             this.legend1.TabIndex = 0;
             this.legend1.Text = "legend1";
             this.legend1.VerticalScrollEnabled = true;
@@ -190,7 +194,7 @@ namespace SiG
             this.map1.ProjectionModeReproject = DotSpatial.Controls.ActionMode.Prompt;
             this.map1.RedrawLayersWhileResizing = false;
             this.map1.SelectionEnabled = true;
-            this.map1.Size = new System.Drawing.Size(765, 613);
+            this.map1.Size = new System.Drawing.Size(765, 464);
             this.map1.TabIndex = 0;
             this.map1.ZoomOutFartherThanMaxExtent = false;
             // 
@@ -332,12 +336,21 @@ namespace SiG
             // 
             // toolStripSplitButton2
             // 
-            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAttributeTableToolStripMenuItem});
             this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton2.Name = "toolStripSplitButton2";
-            this.toolStripSplitButton2.Size = new System.Drawing.Size(39, 24);
-            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(60, 24);
+            this.toolStripSplitButton2.Text = "Data";
+            // 
+            // showAttributeTableToolStripMenuItem
+            //
+            this.showAttributeTableToolStripMenuItem.Name = "showAttributeTableToolStripMenuItem";
+            this.showAttributeTableToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.showAttributeTableToolStripMenuItem.Text = "Show Attribute Table";
+            this.showAttributeTableToolStripMenuItem.MouseEnter += new System.EventHandler(this.showAttributeTableToolStripMenuItem_Click);
             // 
             // tabPage2
             // 
@@ -382,11 +395,21 @@ namespace SiG
             this.yPos.TabIndex = 9;
             this.yPos.Text = "0.00000";
             // 
+            // attributeTable
+            // 
+            this.attributeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.attributeTable.Location = new System.Drawing.Point(0, 492);
+            this.attributeTable.Name = "attributeTable";
+            this.attributeTable.RowTemplate.Height = 24;
+            this.attributeTable.Size = new System.Drawing.Size(1149, 149);
+            this.attributeTable.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 640);
+            this.ClientSize = new System.Drawing.Size(1152, 643);
+            this.Controls.Add(this.attributeTable);
             this.Controls.Add(this.yPos);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.xPos);
@@ -411,6 +434,7 @@ namespace SiG
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.attributeTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,6 +477,8 @@ namespace SiG
         private System.Windows.Forms.Label xPos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label yPos;
+        private System.Windows.Forms.DataGridView attributeTable;
+        private System.Windows.Forms.ToolStripMenuItem showAttributeTableToolStripMenuItem;
     }
 }
 

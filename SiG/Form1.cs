@@ -34,7 +34,7 @@ namespace SiG
 
         public Form1()
         {
-
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
             timer = new Timer();
             timer.Tick += new EventHandler(GETXY);
@@ -150,6 +150,43 @@ namespace SiG
            
         }
 
+        private void showAttributeTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+         
+            foreach (Layer lyr in map1.Layers ) {
+                bool isThere = false;
+                for (int i = 0; i < showAttributeTableToolStripMenuItem.DropDownItems.Count; i++) {
+                    if (showAttributeTableToolStripMenuItem.DropDownItems[i].Text.Equals(lyr.LegendText)) isThere = true;
+                }
+                if(!isThere)showAttributeTableToolStripMenuItem.DropDownItems.Add(lyr.LegendText);
+            }
+
+            foreach (ToolStripDropDownItem dropDownItem in showAttributeTableToolStripMenuItem.DropDownItems) {
+                dropDownItem.Click += new EventHandler(ShowTable);
+            }
+        }
+
+        private void ShowTable(object sender, EventArgs e)
+        {
+            for (int i = 0; i < map1.Layers.Count; i++) {
+                if (map1.Layers[i].LegendText.Trim().Equals(((ToolStripMenuItem)sender).Text.Trim())) {
+                    MessageBox.Show(map1.Layers[i].GetType().ToString());
+                    switch (map1.Layers[i].GetType().ToString().Trim()) {
+                        case "DotSpatial.Controls.MapPointLayer":
+                            attributeTable.DataSource = ((MapPointLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
+                            break;
+                        case "DotSpatial.Controls.MapLineLayer":
+                            attributeTable.DataSource = ((MapLineLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
+                            break;
+                        case "DotSpatial.Controls.MapPolygonLayer":
+                            attributeTable.DataSource = ((MapPolygonLayer)map1.GetLayers()[i]).FeatureSet.DataTable;
+                            break;
+                    }
+                   
+                }
+            }
+        }
+
         private void openShapeFileToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             map1.AddLayer();
@@ -179,7 +216,7 @@ namespace SiG
             // The Symbolizer controls what the points look like
             _markerLayer.Symbolizer = new PointSymbolizer(Color.Black, DotSpatial.Symbology.PointShape.Ellipse, 10);
 
-            _markerLayer.LegendText = "Points";
+            _markerLayer.LegendText = "Points"+_markerLayer.GetHashCode();
             // A drawing layer draws on top of data layers, but is still georeferenced.
             map1.Layers.Add(_markerLayer);
         }
@@ -204,7 +241,7 @@ namespace SiG
             Corr = new List<Coordinate>();
             _lines.DataTable.Columns.Add("ID", typeof(string));
 
-            _lineLayer.LegendText = "Line";
+            _lineLayer.LegendText = "Line" + _lineLayer.GetHashCode();
             // A drawing layer draws on top of data layers, but is still georeferenced.
             map1.Layers.Add(_lineLayer);
         }
@@ -232,7 +269,7 @@ namespace SiG
             // The Symbolizer controls what the points look like
             _goneLayer.Symbolizer = new PolygonSymbolizer(Color.Blue);
 
-            _goneLayer.LegendText = "Surface";
+            _goneLayer.LegendText = "Surface" + _goneLayer.GetHashCode();
             // A drawing layer draws on top of data layers, but is still georeferenced.
             map1.Layers.Add(_goneLayer);
         }
