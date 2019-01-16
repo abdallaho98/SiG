@@ -31,21 +31,30 @@ namespace SiG
         private Timer timer;
         private Form2 entreType;
         private Form3 topology;
+        private Form4 sca;
         private List<Coordinate> Corr;
         private int ID;
         private IFeature mapPolyGonelayer,mapPolylinelayer;
         private DotSpatial.Topology.Polygon mPolygone;
+        private double scale;
+        private double coef;
 
         public Form1()
         {
             entreType = new Form2(this);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
+            coef = 1110000;
             timer = new Timer();
             timer.Tick += new EventHandler(GETXY);
             timer.Interval = 500;
             attributeTable.AllowUserToAddRows = false;
+            label2.Text = "1";
+            label4.Text = "1";
 
+            
+            
         }
 
         private void mousePos(object sender, EventArgs e)
@@ -62,6 +71,8 @@ namespace SiG
             Coordinate c = map1.PixelToProj(new System.Drawing.Point(MousePosition.X, MousePosition.Y));
             xPos.Text = c.X.ToString();
             yPos.Text = c.Y.ToString();
+            scale = (map1.ViewExtents.Width) * coef / map1.Extent.Width;
+            label4.Text = Math.Ceiling(scale).ToString();
         }
 
         private void openRasterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,9 +115,12 @@ namespace SiG
             {
                 // Get the geographic location that was clicked
                 Coordinate c = map1.PixelToProj(new System.Drawing.Point(e.X, e.Y));
-                
+
                 // Add the new coordinate as a "point" to the point featureset
-                _markerLayer.DataSet.AddFeature(new DotSpatial.Topology.Point(c)).DataRow["ID"] = ID;
+                IFeature pointfeature = _markerLayer.DataSet.AddFeature(new DotSpatial.Topology.Point(c));
+                pointfeature.DataRow["ID"] = ID ;
+                pointfeature.DataRow["X"] = c.X;
+                pointfeature.DataRow["Y"] = c.Y;
                 ID = _markerLayer.DataSet.Features.Count;
                 _markers.InitializeVertices();
                 // Drawing will take place from a bitmap buffer, so if data is updated,
@@ -203,9 +217,21 @@ namespace SiG
         private void topologyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(  map1.Layers[1].LegendText.ToString()+" "+((MapPolygonLayer)map1.Layers[1]).FeatureSet.Features[0].Area().ToString());
-            topology = new Form3(map1.Layers);
+            topology = new Form3(map1.Layers,scale);
             topology.ShowDialog();
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            map1.FunctionMode = FunctionMode.Info;
+        }
+
+        private void changeScaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sca = new Form4(this);
+            sca.ShowDialog();
+        }
+        public void setCoef(int co) { sca.Close(); coef = co * (map1.Extent.Width) / map1.ViewExtents.Width; }
 
         private void openShapeFileToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -213,6 +239,8 @@ namespace SiG
             map1.FunctionMode = FunctionMode.Pan;
             map1.MouseEnter += mousePos;
             map1.MouseLeave += mouseExit;
+           
+            
         }
 
         private void pointToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,6 +257,8 @@ namespace SiG
             dataTable = _markers.DataTable;
             ID = 0;
             dataTable.Columns.Add("ID");
+            dataTable.Columns.Add("X");
+            dataTable.Columns.Add("Y");
             // The MapPointLayer controls the drawing of the marker features
             _markerLayer = new MapPointLayer(_markers);
             // The Symbolizer controls what the points look like

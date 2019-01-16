@@ -38,12 +38,13 @@
             this.distanceBetween = new System.Windows.Forms.Button();
             this.disjoint = new System.Windows.Forms.Button();
             this.difference = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1, 163);
+            this.comboBox1.Location = new System.Drawing.Point(3, 49);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(260, 24);
             this.comboBox1.TabIndex = 0;
@@ -61,7 +62,7 @@
             // resultat
             // 
             this.resultat.AutoSize = true;
-            this.resultat.Location = new System.Drawing.Point(358, 308);
+            this.resultat.Location = new System.Drawing.Point(343, 401);
             this.resultat.Name = "resultat";
             this.resultat.Size = new System.Drawing.Size(64, 17);
             this.resultat.TabIndex = 2;
@@ -80,7 +81,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(502, 163);
+            this.comboBox2.Location = new System.Drawing.Point(502, 52);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(286, 24);
             this.comboBox2.TabIndex = 4;
@@ -135,11 +136,22 @@
             this.difference.UseVisualStyleBackColor = true;
             this.difference.Click += new System.EventHandler(this.difference_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(309, 261);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(126, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Cross";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.difference);
             this.Controls.Add(this.disjoint);
             this.Controls.Add(this.distanceBetween);
@@ -169,5 +181,6 @@
         private System.Windows.Forms.Button distanceBetween;
         private System.Windows.Forms.Button disjoint;
         private System.Windows.Forms.Button difference;
+        private System.Windows.Forms.Button button1;
     }
 }

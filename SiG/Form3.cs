@@ -18,9 +18,11 @@ namespace SiG
     {
         private DotSpatial.Controls.IMapLayerCollection maplayers;
         private List<IFeature> geometries;
-        public Form3(DotSpatial.Controls.IMapLayerCollection layers)
+        private double scale;
+        public Form3(DotSpatial.Controls.IMapLayerCollection layers, double scale)
         {
             maplayers = layers;
+            this.scale = scale;
             InitializeComponent();
             geometries = new List<IFeature>();
             List<string> lists = new List<string>();
@@ -55,7 +57,7 @@ namespace SiG
 
         private void Surface_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Area().ToString();
+            resultat.Text = (geometries[comboBox1.SelectedIndex].Area() * scale).ToString();
         }
 
         private void distance_Click(object sender, EventArgs e)
@@ -65,32 +67,45 @@ namespace SiG
             {
                 distance += geometries[comboBox1.SelectedIndex].Coordinates[i].Distance(geometries[comboBox1.SelectedIndex].Coordinates[i - 1]);
             }
-            resultat.Text = distance.ToString();
+            resultat.Text = (distance * scale).ToString();
         }
 
         private void union_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Union(geometries[comboBox2.SelectedIndex]).Area().ToString();
+            try {
+                resultat.Text = (geometries[comboBox1.SelectedIndex].Union(geometries[comboBox2.SelectedIndex]).Area() * scale).ToString();
+                } catch (Exception ee) { MessageBox.Show(ee.Message); }
+           
         }
 
         private void intersection_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Intersection(geometries[comboBox2.SelectedIndex]) != null ? geometries[comboBox1.SelectedIndex].Intersection(geometries[comboBox2.SelectedIndex]).Area().ToString():"0";
+            try   {resultat.Text = geometries[comboBox1.SelectedIndex].Intersection(geometries[comboBox2.SelectedIndex]) != null ? geometries[comboBox1.SelectedIndex].Intersection(geometries[comboBox2.SelectedIndex]).Area().ToString() : "0"; } catch (Exception ee) { MessageBox.Show(ee.Message); }
+           
         }
 
         private void distanceBetween_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Distance(geometries[comboBox2.SelectedIndex]).ToString();
+            try { resultat.Text = (geometries[comboBox1.SelectedIndex].Distance(geometries[comboBox2.SelectedIndex]) * scale).ToString();  } catch (Exception ee) { MessageBox.Show(ee.Message); }
+          
         }
 
         private void disjoint_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Disjoint(geometries[comboBox2.SelectedIndex]).ToString();
+            try { resultat.Text = geometries[comboBox1.SelectedIndex].Disjoint(geometries[comboBox2.SelectedIndex]).ToString();  } catch (Exception ee) { MessageBox.Show(ee.Message); }
+           
         }
 
         private void difference_Click(object sender, EventArgs e)
         {
-            resultat.Text = geometries[comboBox1.SelectedIndex].Difference(geometries[comboBox2.SelectedIndex]).Area().ToString();
+            try { resultat.Text = (geometries[comboBox1.SelectedIndex].Difference(geometries[comboBox2.SelectedIndex]).Area() * scale).ToString(); } catch (Exception ee) { MessageBox.Show(ee.Message); }
+         
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try { resultat.Text = geometries[comboBox1.SelectedIndex].Crosses(geometries[comboBox2.SelectedIndex]).ToString(); } catch (Exception ee) { MessageBox.Show(ee.Message); }
+
         }
     }
 }

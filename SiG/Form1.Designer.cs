@@ -30,6 +30,7 @@ namespace SiG
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.appManager1 = new DotSpatial.Controls.AppManager();
             this.spatialDockManager1 = new DotSpatial.Controls.SpatialDockManager();
@@ -44,10 +45,6 @@ namespace SiG
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit = new System.Windows.Forms.ToolStripDropDownButton();
             this.openRasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openShapeFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +55,8 @@ namespace SiG
             this.polyGoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.showAttributeTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.xPos = new System.Windows.Forms.Label();
@@ -65,7 +64,10 @@ namespace SiG
             this.yPos = new System.Windows.Forms.Label();
             this.attributeTable = new System.Windows.Forms.DataGridView();
             this.AddComlumn = new System.Windows.Forms.Button();
-            this.topologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.changeScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spatialDockManager1)).BeginInit();
             this.spatialDockManager1.Panel1.SuspendLayout();
             this.spatialDockManager1.Panel2.SuspendLayout();
@@ -77,6 +79,7 @@ namespace SiG
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attributeTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // appManager1
@@ -103,8 +106,8 @@ namespace SiG
             // spatialDockManager1.Panel2
             // 
             this.spatialDockManager1.Panel2.Controls.Add(this.map1);
-            this.spatialDockManager1.Size = new System.Drawing.Size(1152, 464);
-            this.spatialDockManager1.SplitterDistance = 383;
+            this.spatialDockManager1.Size = new System.Drawing.Size(1890, 814);
+            this.spatialDockManager1.SplitterDistance = 628;
             this.spatialDockManager1.TabControl1 = this.tabControl1;
             this.spatialDockManager1.TabControl2 = null;
             this.spatialDockManager1.TabIndex = 4;
@@ -116,7 +119,7 @@ namespace SiG
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(383, 464);
+            this.tabControl1.Size = new System.Drawing.Size(628, 814);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -126,7 +129,7 @@ namespace SiG
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(375, 435);
+            this.tabPage1.Size = new System.Drawing.Size(620, 785);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Legend";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -137,11 +140,11 @@ namespace SiG
             this.spatialStatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.spatialStatusStrip1.Location = new System.Drawing.Point(3, 407);
+            this.spatialStatusStrip1.Location = new System.Drawing.Point(3, 757);
             this.spatialStatusStrip1.Name = "spatialStatusStrip1";
             this.spatialStatusStrip1.ProgressBar = this.toolStripProgressBar1;
             this.spatialStatusStrip1.ProgressLabel = this.toolStripStatusLabel1;
-            this.spatialStatusStrip1.Size = new System.Drawing.Size(369, 25);
+            this.spatialStatusStrip1.Size = new System.Drawing.Size(614, 25);
             this.spatialStatusStrip1.TabIndex = 1;
             this.spatialStatusStrip1.Text = "spatialStatusStrip1";
             // 
@@ -159,7 +162,7 @@ namespace SiG
             // legend1
             // 
             this.legend1.BackColor = System.Drawing.Color.White;
-            this.legend1.ControlRectangle = new System.Drawing.Rectangle(0, 0, 369, 429);
+            this.legend1.ControlRectangle = new System.Drawing.Rectangle(0, 0, 614, 779);
             this.legend1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.legend1.DocumentRectangle = new System.Drawing.Rectangle(0, 0, 187, 428);
             this.legend1.HorizontalScrollEnabled = true;
@@ -172,7 +175,7 @@ namespace SiG
             this.legend1.ResetOnResize = false;
             this.legend1.SelectionFontColor = System.Drawing.Color.Black;
             this.legend1.SelectionHighlight = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(238)))), ((int)(((byte)(252)))));
-            this.legend1.Size = new System.Drawing.Size(369, 429);
+            this.legend1.Size = new System.Drawing.Size(614, 779);
             this.legend1.TabIndex = 0;
             this.legend1.Text = "legend1";
             this.legend1.VerticalScrollEnabled = true;
@@ -196,7 +199,7 @@ namespace SiG
             this.map1.ProjectionModeReproject = DotSpatial.Controls.ActionMode.Prompt;
             this.map1.RedrawLayersWhileResizing = false;
             this.map1.SelectionEnabled = true;
-            this.map1.Size = new System.Drawing.Size(765, 464);
+            this.map1.Size = new System.Drawing.Size(1258, 814);
             this.map1.TabIndex = 0;
             this.map1.ZoomOutFartherThanMaxExtent = false;
             this.map1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.map1_Load);
@@ -232,42 +235,13 @@ namespace SiG
             this.openToolStripMenuItem1.Size = new System.Drawing.Size(57, 24);
             this.openToolStripMenuItem1.Text = "Open";
             // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.closeToolStripMenuItem});
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(51, 24);
-            this.toolStripSplitButton1.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
-            this.closeToolStripMenuItem.Text = "Close";
-            // 
             // Edit
             // 
             this.Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.Edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openRasterToolStripMenuItem,
-            this.openShapeFileToolStripMenuItem});
+            this.openShapeFileToolStripMenuItem,
+            this.changeScaleToolStripMenuItem});
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Edit.Name = "Edit";
@@ -277,14 +251,14 @@ namespace SiG
             // openRasterToolStripMenuItem
             // 
             this.openRasterToolStripMenuItem.Name = "openRasterToolStripMenuItem";
-            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.openRasterToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.openRasterToolStripMenuItem.Text = "Open Raster";
             this.openRasterToolStripMenuItem.Click += new System.EventHandler(this.openRasterToolStripMenuItem_Click);
             // 
             // openShapeFileToolStripMenuItem
             // 
             this.openShapeFileToolStripMenuItem.Name = "openShapeFileToolStripMenuItem";
-            this.openShapeFileToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.openShapeFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.openShapeFileToolStripMenuItem.Text = "Open ShapeFile";
             this.openShapeFileToolStripMenuItem.Click += new System.EventHandler(this.openShapeFileToolStripMenuItem_Click_1);
             // 
@@ -292,13 +266,13 @@ namespace SiG
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSplitButton1,
             this.Edit,
             this.toolStripButton1,
-            this.toolStripSplitButton2});
+            this.toolStripSplitButton2,
+            this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1152, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1902, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -356,6 +330,23 @@ namespace SiG
             this.showAttributeTableToolStripMenuItem.Text = "Show Attribute Table";
             this.showAttributeTableToolStripMenuItem.MouseEnter += new System.EventHandler(this.showAttributeTableToolStripMenuItem_Click);
             // 
+            // topologyToolStripMenuItem
+            // 
+            this.topologyToolStripMenuItem.Name = "topologyToolStripMenuItem";
+            this.topologyToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.topologyToolStripMenuItem.Text = "Topology";
+            this.topologyToolStripMenuItem.Click += new System.EventHandler(this.topologyToolStripMenuItem_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(0, 0);
@@ -402,35 +393,57 @@ namespace SiG
             // attributeTable
             // 
             this.attributeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.attributeTable.Location = new System.Drawing.Point(0, 492);
+            this.attributeTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.attributeTable.Location = new System.Drawing.Point(0, 874);
             this.attributeTable.Name = "attributeTable";
             this.attributeTable.RowTemplate.Height = 24;
-            this.attributeTable.Size = new System.Drawing.Size(1149, 149);
+            this.attributeTable.Size = new System.Drawing.Size(1902, 181);
             this.attributeTable.TabIndex = 11;
             // 
             // AddComlumn
             // 
-            this.AddComlumn.Location = new System.Drawing.Point(1031, 499);
+            this.AddComlumn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.AddComlumn.Location = new System.Drawing.Point(1793, 27);
             this.AddComlumn.Name = "AddComlumn";
-            this.AddComlumn.Size = new System.Drawing.Size(109, 34);
+            this.AddComlumn.Size = new System.Drawing.Size(109, 847);
             this.AddComlumn.TabIndex = 12;
             this.AddComlumn.Text = "Add column";
             this.AddComlumn.UseVisualStyleBackColor = true;
             this.AddComlumn.Visible = false;
             this.AddComlumn.Click += new System.EventHandler(this.button1_Click);
             // 
-            // topologyToolStripMenuItem
+            // label2
             // 
-            this.topologyToolStripMenuItem.Name = "topologyToolStripMenuItem";
-            this.topologyToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
-            this.topologyToolStripMenuItem.Text = "Topology";
-            this.topologyToolStripMenuItem.Click += new System.EventHandler(this.topologyToolStripMenuItem_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1172, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 17);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "label2";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1292, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "label4";
+            // 
+            // changeScaleToolStripMenuItem
+            // 
+            this.changeScaleToolStripMenuItem.Name = "changeScaleToolStripMenuItem";
+            this.changeScaleToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.changeScaleToolStripMenuItem.Text = "Change Scale";
+            this.changeScaleToolStripMenuItem.Click += new System.EventHandler(this.changeScaleToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 643);
+            this.ClientSize = new System.Drawing.Size(1902, 1055);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.AddComlumn);
             this.Controls.Add(this.attributeTable);
             this.Controls.Add(this.yPos);
@@ -458,6 +471,7 @@ namespace SiG
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attributeTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -469,6 +483,7 @@ namespace SiG
         }
 
         #endregion
+        private DotSpatial.Controls.LayoutScaleBar scaleBar = new DotSpatial.Controls.LayoutScaleBar();
         private DotSpatial.Controls.AppManager appManager1;
         private DotSpatial.Controls.SpatialDockManager spatialDockManager1;
         private System.Windows.Forms.TabControl tabControl1;
@@ -476,10 +491,6 @@ namespace SiG
         private DotSpatial.Controls.Legend legend1;
         private System.Windows.Forms.TabPage tabPage2;
         private DotSpatial.Controls.Map map1;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton Edit;
         private System.Windows.Forms.ToolStripMenuItem openRasterToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -504,6 +515,11 @@ namespace SiG
         private System.Windows.Forms.ToolStripMenuItem showAttributeTableToolStripMenuItem;
         private System.Windows.Forms.Button AddComlumn;
         private System.Windows.Forms.ToolStripMenuItem topologyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem changeScaleToolStripMenuItem;
     }
 }
 
